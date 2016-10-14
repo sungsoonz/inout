@@ -13,7 +13,20 @@ if ($mysqli->query("CREATE TABLE User") === TRUE) {
     printf("Table was successfully created.\n");
 }
 
+//선재 테스트
+if ($result = $mysqli->query("SELECT * FROM Customers")) {
+	
+	printf("Select returned %d rows.\n", $result->num_rows);
 
+	while($row = $result->fetch_assoc()) {
+		echo "<p>" . $row['CustomerID'] . " - " . $row['Firstname'] . '</p>';
+	}
+
+	/* free result set */
+	$result->close();
+}
+
+$mysqli->close();
 
 
 // if (!$db_selected) {
