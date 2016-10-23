@@ -1,5 +1,6 @@
 <?php
-// Connect to MySQL
+
+//database connection
 
 $mysql_host = 'localhost';
 $mysql_user = 'root';
@@ -18,5 +19,3 @@ if ($mysqli->connect_errno) {
 
 
 ?>
-
-

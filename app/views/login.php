@@ -19,8 +19,8 @@ if ( isset($_POST['username']) && isset($_POST['password']) ) {
 			header('Location: index.php');
  		}
  		
-//  		$result->close();
- 		$mysqli->close();
+ 		$result->close();
+ 		// $mysqli->close();
  	}
  		
  } else { 	
