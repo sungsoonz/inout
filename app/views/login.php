@@ -6,22 +6,16 @@ if ( isset($_POST['username']) && isset($_POST['password']) ) {
  $password_hash = md5($password);
  
  if ( !empty($username) && !empty($password) ) {
- 	$query = "SELECT * FROM user WHERE username='$username' AND password='$password_hash'";
+
+ 	$user = DB::getInstance()->query("SELECT * FROM user WHERE username = ? AND password = ?", array($username, $password_hash));
  	
- 	if ($result = $mysqli->query($query)) {
- 		if ($result->num_rows == 0) {
- 			echo 'Invalid username or password.';
- 		} else {
- 			$row = $result->fetch_assoc();
-			// echo "Welcome " . $row['first_name'];
-			$user_id = $row['id'];
-			$_SESSION['user_id'] = $user_id;
-			header('Location: index.php');
- 		}
- 		
- 		$result->close();
- 		// $mysqli->close();
- 	}
+	if (!$user->count()) {
+		echo 'Invalid username or password.';
+	} else {
+		$user_id = $user->first()->id;
+		$_SESSION['user_id'] = $user_id;
+		header('Location: index.php');
+	}
  		
  } else { 	
  	echo 'You must enter a username and password.';
